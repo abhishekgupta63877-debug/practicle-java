@@ -1,0 +1,67 @@
+
+interface Printable {
+    void print();
+}
+
+interface Scannable {
+    void scan();
+}
+class AllInOnePrinter implements Printable, Scannable {
+    @Override
+    public void print() {
+        System.out.println("AllInOnePrinter is Printing document...");
+    }
+
+    @Override
+    public void scan() {
+        System.out.println("AllInOnePrinter is Scanning document...");
+    }
+}
+
+
+class Device {
+    String deviceId = "DEV-009";
+    void showDevice() {
+        System.out.println("Device ID: " + deviceId);
+    }
+}
+
+interface Connectable {
+    void connect();
+}
+
+class SmartPrinter extends Device implements Printable, Connectable {
+    @Override
+    public void print() {
+        System.out.println("SmartPrinter [" + deviceId + "] is Printing...");
+    }
+
+    @Override
+    public void connect() {
+        System.out.println("SmartPrinter [" + deviceId + "] Connected to WiFi");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        System.out.println("--- A. Multiple Inheritance using Interfaces ---");
+        AllInOnePrinter printer = new AllInOnePrinter();
+        printer.print();
+        printer.scan();
+
+        System.out.println("\n--- B. Hybrid Inheritance (Base Class + Interfaces) ---");
+        SmartPrinter sp = new SmartPrinter();
+        sp.showDevice();
+        sp.connect();
+        sp.print();
+
+        System.out.println("\n--- Explanation ---");
+        System.out.println("Java supports multiple inheritance through interfaces because");
+        System.out.println("interfaces only have abstract methods, so there is no ambiguity");
+        System.out.println("of which parent's method to call (No Diamond Problem).");
+        System.out.println("Java does NOT support multiple parent classes because if two");
+        System.out.println("parent classes have same method, child gets confused - called Diamond Problem.");
+    }
+}
+
+    
